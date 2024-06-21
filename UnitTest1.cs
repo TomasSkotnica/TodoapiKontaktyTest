@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Text.Json;
@@ -86,6 +87,14 @@ namespace TodoapiKontaktyTest
                 Email = "em@w.a",
                 Phone = "123"
             };
+        }
+
+        [Test]
+        public void TestCountOfRows()
+        {
+            KontaktyOM pom = new(driver);
+            int c = pom.GetRowCount();
+            Assert.AreEqual(7, c);
         }
     }
 }

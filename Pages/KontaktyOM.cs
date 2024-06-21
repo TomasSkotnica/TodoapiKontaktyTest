@@ -1,9 +1,11 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TodoapiKontaktyTest.DTO;
 
 namespace TodoapiKontaktyTest.Pages
@@ -25,6 +27,8 @@ namespace TodoapiKontaktyTest.Pages
         IWebElement EmailInput => driver.FindElement(By.Id("add-email"));
         IWebElement PhoneInput => driver.FindElement(By.Id("add-phone"));
         IWebElement AddButton => driver.FindElement(By.Id("add-button"));
+
+        IEnumerable<IWebElement> TableRows => driver.FindElements(By.TagName("tr"));
 
         public void AddKontakt2(string name, string email)
         {
@@ -59,6 +63,19 @@ namespace TodoapiKontaktyTest.Pages
             NameInput.EnterTextEM(name);
             EmailInput.EnterTextEM(email);
             AddButton.ClickElement();
+        }
+
+        public int GetRowCount()
+        {
+            // Retrieves the text of the element
+            // String text = driver.FindElement(By.Id("justanotherlink")).Text;
+
+            // <li class="email">
+            // <a class="email__content email__content--link"
+
+            // innerText returns all text contained by an element and all its child elements.
+            // innerHtml returns all text, including html tags, that is contained by an element.
+            return TableRows.Count(); 
         }
     }
 }
